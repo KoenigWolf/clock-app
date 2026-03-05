@@ -1,10 +1,9 @@
 import { useSyncExternalStore } from 'react'
 
-import { DAYS } from '@/constants/days'
-import type { TimeState } from '@/types/time'
+import type { RawTimeState } from '@/types/time'
 
 // Singleton time store for all subscribers
-let currentTime: TimeState | null = null
+let currentTime: RawTimeState | null = null
 let listeners: Set<() => void> = new Set()
 let intervalId: ReturnType<typeof setInterval> | null = null
 let lastSecond = -1
@@ -13,20 +12,14 @@ function padZero(n: number): string {
   return n < 10 ? `0${n}` : String(n)
 }
 
-function calculateTime(): TimeState | null {
+function calculateTime(): RawTimeState {
   const now = new Date()
-  const dayIndex = now.getDay()
-  const weekday = DAYS[dayIndex]
-
-  if (weekday === undefined) {
-    return null
-  }
 
   return {
     hours: padZero(now.getHours()),
     minutes: padZero(now.getMinutes()),
     seconds: padZero(now.getSeconds()),
-    date: `${now.getFullYear()}年${now.getMonth() + 1}月${now.getDate()}日 (${weekday})`,
+    rawDate: now,
   }
 }
 
@@ -79,11 +72,11 @@ function subscribe(listener: () => void): () => void {
   }
 }
 
-function getSnapshot(): TimeState | null {
+function getSnapshot(): RawTimeState | null {
   return currentTime
 }
 
-function getServerSnapshot(): TimeState | null {
+function getServerSnapshot(): RawTimeState | null {
   return null
 }
 
@@ -92,9 +85,9 @@ function getServerSnapshot(): TimeState | null {
  * - Single timer shared across all components
  * - Updates only on second boundaries
  * - Automatically starts/stops based on subscribers
- * - Optimized to minimize re-renders
+ * - Returns rawDate for locale-specific formatting
  */
-export function useTime(): TimeState | null {
+export function useTime(): RawTimeState | null {
   return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
 }
 
