@@ -4,16 +4,55 @@ Next.js で作成されたシンプルなデジタル時計アプリです。
 
 ## 機能
 
-- リアルタイムで更新される時刻表示
+- リアルタイムで更新される時刻表示（毎秒更新）
 - 日本語形式の日付表示（年月日・曜日）
 - レスポンシブデザイン
+- アクセシビリティ対応（ARIA属性、スクリーンリーダー対応）
+- エラーバウンダリによる堅牢なエラーハンドリング
 
 ## 技術スタック
 
-- Next.js 14
+- Next.js 14 (App Router)
 - React 18
-- TypeScript
+- TypeScript (strict mode)
 - Tailwind CSS
+- Vitest + React Testing Library
+
+## プロジェクト構造
+
+```
+src/
+├── app/                    # Next.js App Router
+│   ├── layout.tsx          # ルートレイアウト
+│   ├── page.tsx            # メインページ
+│   └── globals.css         # グローバルスタイル
+├── components/             # Reactコンポーネント
+│   ├── Clock.tsx           # 時計メインコンポーネント
+│   ├── TimeDisplay.tsx     # 時刻表示
+│   ├── DateDisplay.tsx     # 日付表示
+│   ├── ErrorBoundary.tsx   # エラーバウンダリ
+│   └── __tests__/          # コンポーネントテスト
+├── hooks/                  # カスタムフック
+│   └── useTime.ts          # 時刻管理フック
+├── utils/                  # ユーティリティ関数
+│   └── formatTime.ts       # 時刻フォーマット
+├── constants/              # 定数
+│   └── days.ts             # 曜日定義
+└── types/                  # 型定義
+    └── time.ts             # 時刻関連の型
+```
+
+## アーキテクチャ
+
+### パフォーマンス最適化
+
+- **useSyncExternalStore**: シングルトンタイマーで複数コンポーネント間で状態を共有
+- **React.memo**: 不要な再レンダリングを防止
+- **CSS containment**: レイアウト計算の最適化
+
+### 状態管理
+
+時刻の更新は `useTime` フックで一元管理され、全てのサブスクライバーに効率的に配信されます。
 
 ## 必要条件
 
@@ -47,3 +86,26 @@ http://localhost:3000 でアプリを確認できます。
 | `npm run test`          | Vitest でテストを実行 (watch) |
 | `npm run test:run`      | Vitest でテストを実行 (単発)  |
 | `npm run test:coverage` | カバレッジ付きでテストを実行  |
+
+## CI/CD
+
+GitHub Actions による自動化:
+
+- **Lint**: ESLint + Prettier チェック
+- **Type Check**: TypeScript 型チェック
+- **Test**: Vitest によるテスト実行
+- **Build**: プロダクションビルド検証
+
+プルリクエスト時に自動実行されます。
+
+## 開発環境
+
+### 推奨 VS Code 拡張機能
+
+- ESLint
+- Prettier
+- Tailwind CSS IntelliSense
+
+### Pre-commit フック
+
+Husky + lint-staged により、コミット時に自動でリント・フォーマットが実行されます。
