@@ -16,7 +16,11 @@
       "Bash(gh pr list:*)",
       "Bash(gh pr view:*)",
       "Bash(gh pr diff:*)",
-      "Bash(gh pr create:*)"
+      "Bash(gh pr create:*)",
+      "Bash(git pull:*)",
+      "Bash(npm run lint:fix:*)",
+      "Bash(git reset:*)",
+      "Bash(git rm:*)"
     ]
   }
 }
