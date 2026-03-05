@@ -1,3 +1,6 @@
+'use client'
+
+import { useTranslations } from 'next-intl'
 import { memo } from 'react'
 
 type Props = {
@@ -5,10 +8,12 @@ type Props = {
 }
 
 export const DateDisplay = memo(function DateDisplay({ date }: Props) {
+  const t = useTranslations('date')
+
   return (
     <p
       role="status"
-      aria-label={`今日の日付 ${date}`}
+      aria-label={`${t('todaysDate')} ${date}`}
       className="mt-4 text-xl font-light tracking-wider text-white/60"
     >
       {date}

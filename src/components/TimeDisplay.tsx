@@ -1,3 +1,6 @@
+'use client'
+
+import { useLocale, useTranslations } from 'next-intl'
 import { memo } from 'react'
 
 import { HoursMinutesDisplay } from './HoursMinutesDisplay'
@@ -14,7 +17,13 @@ export const TimeDisplay = memo(function TimeDisplay({
   minutes,
   seconds,
 }: Props) {
-  const timeLabel = `現在時刻 ${hours}時${minutes}分${seconds}秒`
+  const t = useTranslations('time')
+  const locale = useLocale()
+
+  const timeLabel =
+    locale === 'ja'
+      ? `${t('currentTime')} ${hours}${t('hours')}${minutes}${t('minutes')}${seconds}${t('seconds')}`
+      : `${t('currentTime')} ${hours} ${t('hours')} ${minutes} ${t('minutes')} ${seconds} ${t('seconds')}`
 
   return (
     <div
