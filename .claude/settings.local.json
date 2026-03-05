@@ -2,8 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(npm run build:*)",
-      "Bash(git init:*)",
-      "Bash(git checkout:*)",
+      "Bash(git init *)",
+      "Bash(git checkout *)",
       "Bash(npm install:*)",
       "Bash(npm run test:run:*)",
       "Bash(npm run lint)",

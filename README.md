@@ -15,6 +15,11 @@ Next.js で作成されたシンプルなデジタル時計アプリです。
 - TypeScript
 - Tailwind CSS
 
+## 必要条件
+
+- Node.js 20.x 以上
+- npm 10.x 以上
+
 ## セットアップ
 
 ```bash
@@ -29,10 +34,16 @@ http://localhost:3000 でアプリを確認できます。
 
 ## スクリプト
 
-| コマンド        | 説明                          |
-| --------------- | ----------------------------- |
-| `npm run dev`   | 開発サーバーを起動            |
-| `npm run build` | プロダクションビルド          |
-| `npm run start` | プロダクションサーバーを起動  |
-| `npm run lint`  | ESLint によるコードチェック   |
-| `npm run test`  | Vitest でユニットテストを実行 |
+| コマンド                | 説明                          |
+| ----------------------- | ----------------------------- |
+| `npm run dev`           | 開発サーバーを起動            |
+| `npm run build`         | プロダクションビルド          |
+| `npm run start`         | プロダクションサーバーを起動  |
+| `npm run lint`          | ESLint によるコードチェック   |
+| `npm run lint:fix`      | ESLint で自動修正             |
+| `npm run type-check`    | TypeScript 型チェック         |
+| `npm run format`        | Prettier でコードフォーマット |
+| `npm run format:check`  | フォーマットチェック          |
+| `npm run test`          | Vitest でテストを実行 (watch) |
+| `npm run test:run`      | Vitest でテストを実行 (単発)  |
+| `npm run test:coverage` | カバレッジ付きでテストを実行  |

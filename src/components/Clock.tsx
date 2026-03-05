@@ -5,7 +5,7 @@ import { useTime } from '@/hooks/useTime'
 import { DateDisplay } from './DateDisplay'
 import { TimeDisplay } from './TimeDisplay'
 
-const LOADING_PLACEHOLDER = '--:--'
+const LOADING_PLACEHOLDER = '--:--:--'
 
 export function Clock() {
   const time = useTime()
