@@ -1,68 +1,66 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
-type TimeState = {
-  hours: string
-  minutes: string
-  seconds: string
-  date: string
-}
+import type { TimeState } from '@/types/time'
+import { formatTime } from '@/utils/formatTime'
 
-const DAYS = ['日', '月', '火', '水', '木', '金', '土'] as const
+import { DateDisplay } from './DateDisplay'
+import { TimeDisplay } from './TimeDisplay'
 
-function formatTime(date: Date): TimeState {
-  const hours = String(date.getHours()).padStart(2, '0')
-  const minutes = String(date.getMinutes()).padStart(2, '0')
-  const seconds = String(date.getSeconds()).padStart(2, '0')
+const LOADING_PLACEHOLDER = '--:--'
+const UPDATE_INTERVAL_MS = 1000
 
-  const year = date.getFullYear()
-  const month = date.getMonth() + 1
-  const day = date.getDate()
-  const weekday = DAYS[date.getDay()]
-
-  return {
-    hours,
-    minutes,
-    seconds,
-    date: `${year}年${month}月${day}日 (${weekday})`,
-  }
+function getInitialTime(): TimeState | null {
+  return formatTime(new Date())
 }
 
 export function Clock() {
   const [time, setTime] = useState<TimeState | null>(null)
+  const [isClient, setIsClient] = useState(false)
 
-  useEffect(() => {
-    setTime(formatTime(new Date()))
-
-    const interval = setInterval(() => {
-      setTime(formatTime(new Date()))
-    }, 1000)
-
-    return () => clearInterval(interval)
+  const updateTime = useCallback(() => {
+    const newTime = formatTime(new Date())
+    if (newTime) {
+      setTime(newTime)
+    }
   }, [])
 
-  if (!time) {
+  useEffect(() => {
+    setIsClient(true)
+    const initialTime = getInitialTime()
+    if (initialTime) {
+      setTime(initialTime)
+    }
+
+    const interval = setInterval(updateTime, UPDATE_INTERVAL_MS)
+
+    return () => {
+      clearInterval(interval)
+    }
+  }, [updateTime])
+
+  if (!isClient || !time) {
     return (
-      <div className="text-center">
-        <div className="text-8xl font-extralight text-white/20">--:--</div>
+      <div className="select-none text-center">
+        <div
+          className="text-8xl font-extralight text-white/20"
+          aria-hidden="true"
+        >
+          {LOADING_PLACEHOLDER}
+        </div>
       </div>
     )
   }
 
   return (
-    <div className="text-center select-none">
-      <div className="text-[clamp(4rem,15vw,10rem)] font-extralight tracking-wide text-white drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]">
-        <span className="tabular-nums">{time.hours}</span>
-        <span className="animate-pulse mx-1">:</span>
-        <span className="tabular-nums">{time.minutes}</span>
-        <span className="text-[0.4em] text-white/50 align-top ml-2 tabular-nums">
-          {time.seconds}
-        </span>
-      </div>
-      <p className="text-xl text-white/60 font-light mt-4 tracking-wider">
-        {time.date}
-      </p>
+    <div className="select-none text-center">
+      <TimeDisplay
+        hours={time.hours}
+        minutes={time.minutes}
+        seconds={time.seconds}
+      />
+      <DateDisplay date={time.date} />
     </div>
   )
 }
