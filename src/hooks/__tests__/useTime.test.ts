@@ -1,7 +1,7 @@
 import { act, renderHook } from '@testing-library/react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { useTime, __resetTimeStore } from '../useTime'
+import { __resetTimeStore, useTime } from '../useTime'
 
 describe('useTime', () => {
   beforeEach(() => {
@@ -18,12 +18,12 @@ describe('useTime', () => {
   it('returns time data on client', () => {
     const { result } = renderHook(() => useTime())
 
-    expect(result.current).toEqual({
+    expect(result.current).toMatchObject({
       hours: '10',
       minutes: '30',
       seconds: '45',
-      date: '2024年1月15日 (月)',
     })
+    expect(result.current?.rawDate).toBeInstanceOf(Date)
   })
 
   it('updates when second changes', () => {
@@ -31,10 +31,9 @@ describe('useTime', () => {
 
     expect(result.current?.seconds).toBe('45')
 
-    // Move to next second
     act(() => {
       vi.setSystemTime(new Date(2024, 0, 15, 10, 30, 46, 0))
-      vi.advanceTimersByTime(100) // Trigger the 100ms interval
+      vi.advanceTimersByTime(100)
     })
 
     expect(result.current?.seconds).toBe('46')
@@ -50,19 +49,22 @@ describe('useTime', () => {
     expect(result.current?.seconds).toBe('05')
   })
 
-  it('formats date correctly', () => {
+  it('provides raw Date object for locale-specific formatting', () => {
     const { result } = renderHook(() => useTime())
 
-    expect(result.current?.date).toBe('2024年1月15日 (月)')
+    expect(result.current?.rawDate.getFullYear()).toBe(2024)
+    expect(result.current?.rawDate.getMonth()).toBe(0)
+    expect(result.current?.rawDate.getDate()).toBe(15)
   })
 
   it('shares state between multiple hooks', () => {
     const { result: result1 } = renderHook(() => useTime())
     const { result: result2 } = renderHook(() => useTime())
 
-    expect(result1.current).toEqual(result2.current)
+    expect(result1.current?.hours).toEqual(result2.current?.hours)
+    expect(result1.current?.minutes).toEqual(result2.current?.minutes)
+    expect(result1.current?.seconds).toEqual(result2.current?.seconds)
 
-    // Update time
     act(() => {
       vi.setSystemTime(new Date(2024, 0, 15, 10, 30, 46, 0))
       vi.advanceTimersByTime(100)
