@@ -10,7 +10,7 @@
   "parserOptions": {
     "project": "./tsconfig.json"
   },
-  "ignorePatterns": ["vitest.config.ts", "vitest.setup.ts"],
+  "ignorePatterns": ["vitest.config.ts", "vitest.setup.ts", "next.config.js"],
   "rules": {
     "@typescript-eslint/consistent-type-imports": [
       "error",

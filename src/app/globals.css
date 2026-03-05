@@ -5,3 +5,56 @@
 html {
   font-feature-settings: 'tnum';
 }
+
+/* Performance optimizations */
+@layer utilities {
+  .contain-layout {
+    contain: layout;
+  }
+
+  .contain-paint {
+    contain: paint;
+  }
+
+  .contain-strict {
+    contain: strict;
+  }
+
+  .will-change-contents {
+    will-change: contents;
+  }
+
+  .gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+}
+
+/* Optimized pulse animation using GPU-accelerated opacity */
+@layer components {
+  .colon-pulse {
+    animation: colon-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    will-change: opacity;
+  }
+
+  @keyframes colon-pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .colon-pulse {
+    animation: none;
+  }
+
+  .animate-pulse {
+    animation: none;
+  }
+}
