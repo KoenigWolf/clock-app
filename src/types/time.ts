@@ -4,3 +4,10 @@ export type TimeState = {
   seconds: string
   date: string
 }
+
+export type RawTimeState = {
+  hours: string
+  minutes: string
+  seconds: string
+  rawDate: Date
+}
