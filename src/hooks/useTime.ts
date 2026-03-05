@@ -1,16 +1,10 @@
 import { useSyncExternalStore } from 'react'
 
 import { DAYS } from '@/constants/days'
-
-type TimeData = {
-  hours: string
-  minutes: string
-  seconds: string
-  date: string
-}
+import type { TimeState } from '@/types/time'
 
 // Singleton time store for all subscribers
-let currentTime: TimeData | null = null
+let currentTime: TimeState | null = null
 let listeners: Set<() => void> = new Set()
 let intervalId: ReturnType<typeof setInterval> | null = null
 let lastSecond = -1
@@ -19,7 +13,7 @@ function padZero(n: number): string {
   return n < 10 ? `0${n}` : String(n)
 }
 
-function calculateTime(): TimeData | null {
+function calculateTime(): TimeState | null {
   const now = new Date()
   const dayIndex = now.getDay()
   const weekday = DAYS[dayIndex]
@@ -85,11 +79,11 @@ function subscribe(listener: () => void): () => void {
   }
 }
 
-function getSnapshot(): TimeData | null {
+function getSnapshot(): TimeState | null {
   return currentTime
 }
 
-function getServerSnapshot(): TimeData | null {
+function getServerSnapshot(): TimeState | null {
   return null
 }
 
@@ -100,7 +94,7 @@ function getServerSnapshot(): TimeData | null {
  * - Automatically starts/stops based on subscribers
  * - Optimized to minimize re-renders
  */
-export function useTime(): TimeData | null {
+export function useTime(): TimeState | null {
   return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
 }
 

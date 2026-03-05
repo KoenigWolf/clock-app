@@ -35,6 +35,7 @@ export class ErrorBoundary extends Component<Props, State> {
           <div className="text-center text-white/60">
             <p>時計の表示中にエラーが発生しました</p>
             <button
+              type="button"
               onClick={() => this.setState({ hasError: false })}
               className="mt-4 rounded border border-white/20 px-4 py-2 transition-colors hover:bg-white/10"
             >
