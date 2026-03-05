@@ -16,9 +16,9 @@ describe('Clock', () => {
   it('renders the current time', () => {
     render(<Clock />)
 
-    expect(screen.getByText('10')).toBeDefined()
-    expect(screen.getByText('30')).toBeDefined()
-    expect(screen.getByText('45')).toBeDefined()
+    expect(screen.getByText('10')).toBeInTheDocument()
+    expect(screen.getByText('30')).toBeInTheDocument()
+    expect(screen.getByText('45')).toBeInTheDocument()
   })
 
   it('renders the current date in Japanese format', () => {

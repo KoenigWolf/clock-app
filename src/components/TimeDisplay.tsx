@@ -17,7 +17,6 @@ export const TimeDisplay = memo(function TimeDisplay({
     <div
       role="timer"
       aria-label={timeLabel}
-      aria-live="polite"
       className="text-[clamp(4rem,15vw,10rem)] font-extralight tracking-wide text-white drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]"
     >
       <span className="tabular-nums">{hours}</span>

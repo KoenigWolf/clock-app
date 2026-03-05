@@ -6,6 +6,7 @@ import type { ErrorInfo, ReactNode } from 'react'
 type Props = {
   children: ReactNode
   fallback?: ReactNode
+  logPrefix?: string
 }
 
 type State = {
@@ -23,7 +24,8 @@ export class ErrorBoundary extends Component<Props, State> {
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
-    console.error('Clock error:', error, errorInfo)
+    const prefix = this.props.logPrefix ?? 'ErrorBoundary error:'
+    console.error(prefix, error, errorInfo)
   }
 
   render(): ReactNode {

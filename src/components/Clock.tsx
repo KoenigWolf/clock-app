@@ -42,7 +42,11 @@ export function Clock() {
 
   if (!isClient || !time) {
     return (
-      <div className="select-none text-center">
+      <div
+        className="select-none text-center"
+        role="status"
+        aria-label="時刻を読み込み中"
+      >
         <div
           className="text-8xl font-extralight text-white/20"
           aria-hidden="true"
