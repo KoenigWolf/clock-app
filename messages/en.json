@@ -1,0 +1,36 @@
+{
+  "metadata": {
+    "title": "Clock",
+    "description": "A simple clock app"
+  },
+  "weekdays": {
+    "sunday": "Sun",
+    "monday": "Mon",
+    "tuesday": "Tue",
+    "wednesday": "Wed",
+    "thursday": "Thu",
+    "friday": "Fri",
+    "saturday": "Sat"
+  },
+  "dateFormat": {
+    "template": "{weekday}, {monthName} {day}, {year}"
+  },
+  "time": {
+    "currentTime": "Current time",
+    "hours": "hours",
+    "minutes": "minutes",
+    "seconds": "seconds",
+    "loading": "Loading time",
+    "ariaLabel": "{hours} hours {minutes} minutes {seconds} seconds"
+  },
+  "date": {
+    "todaysDate": "Today's date"
+  },
+  "error": {
+    "clockError": "An error occurred while displaying the clock",
+    "retry": "Retry"
+  },
+  "languageSwitcher": {
+    "label": "Language"
+  }
+}
