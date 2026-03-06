@@ -18,7 +18,7 @@
     "minutes": "分",
     "seconds": "秒",
     "loading": "時刻を読み込み中",
-    "ariaLabel": "{hours}時{minutes}分{seconds}秒"
+    "ariaLabel": "現在時刻 {hours}時{minutes}分{seconds}秒"
   },
   "date": {
     "todaysDate": "今日の日付"

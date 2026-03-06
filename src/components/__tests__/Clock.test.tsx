@@ -74,7 +74,7 @@ describe('Clock', () => {
       const timer = screen.getByRole('timer')
       expect(timer).toHaveAttribute(
         'aria-label',
-        'Current time 10 hours 30 minutes 45 seconds'
+        'Current time: 10 hours 30 minutes 45 seconds'
       )
     })
   })

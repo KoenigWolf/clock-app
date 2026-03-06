@@ -18,8 +18,7 @@ export const TimeDisplay = memo(function TimeDisplay({
   seconds,
 }: Props) {
   const t = useTranslations('time')
-
-  const timeLabel = `${t('currentTime')} ${t('ariaLabel', { hours, minutes, seconds })}`
+  const timeLabel = t('ariaLabel', { hours, minutes, seconds })
 
   return (
     <div
