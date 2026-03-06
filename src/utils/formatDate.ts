@@ -9,7 +9,7 @@ type WeekdayKey =
   | 'friday'
   | 'saturday'
 
-const WEEKDAY_KEYS: WeekdayKey[] = [
+const WEEKDAY_KEYS = [
   'sunday',
   'monday',
   'tuesday',
@@ -17,8 +17,9 @@ const WEEKDAY_KEYS: WeekdayKey[] = [
   'thursday',
   'friday',
   'saturday',
-]
+] as const satisfies readonly WeekdayKey[]
 
+// English month names - for additional locales, consider passing monthNames as parameter
 const MONTH_NAMES = [
   'Jan',
   'Feb',
@@ -44,13 +45,8 @@ export function formatLocalizedDate(
   const year = date.getFullYear()
   const month = date.getMonth() + 1
   const day = date.getDate()
-  const dayIndex = date.getDay()
+  const dayIndex = date.getDay() as 0 | 1 | 2 | 3 | 4 | 5 | 6
   const weekdayKey = WEEKDAY_KEYS[dayIndex]
-
-  if (weekdayKey === undefined) {
-    return ''
-  }
-
   const weekday = weekdays[weekdayKey]
 
   if (locale === 'ja') {
