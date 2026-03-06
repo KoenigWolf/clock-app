@@ -2,23 +2,24 @@
 
 ## Commands
 
-```
+```text
 dev          build        test:run
 type-check   lint         format
 ```
 
 ## Structure
 
-```
+```text
 src/
 ├─ app/[locale]/     # routing only
 ├─ components/{feature}/
 │  ├─ *.tsx, *.test.tsx, index.ts
 ├─ lib/
-│  ├─ hooks/         # client-only, separate import
+│  ├─ hooks/         # client-only, import from @/lib/hooks
 │  ├─ i18n/
 │  ├─ utils/
-│  └─ index.ts       # excludes hooks
+│  ├─ web-vitals/    # client-only, import from @/lib/web-vitals
+│  └─ index.ts       # server-safe only
 ├─ test/
 └─ types/
 ```
@@ -29,7 +30,8 @@ src/
 // ok
 import { X } from '@/components'
 import { x } from '@/lib'
-import { useX } from '@/lib/hooks' // separate
+import { useX } from '@/lib/hooks' // client-only
+import { WebVitals } from '@/lib/web-vitals' // client-only
 import type { X } from '@/types'
 
 // ng
@@ -79,6 +81,6 @@ role="timer" aria-label={t('x')}
 
 ## Pre-submit
 
-```
+```bash
 type-check && lint && test:run && build
 ```

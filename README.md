@@ -35,7 +35,7 @@ http://localhost:3000
 
 ## プロジェクト構造
 
-```
+```text
 src/
 ├── app/[locale]/      # ルーティング
 ├── components/        # UIコンポーネント

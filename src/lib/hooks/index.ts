@@ -1,1 +1,1 @@
-export { useTime, __resetTimeStore } from './useTime'
+export { useTime } from './useTime'

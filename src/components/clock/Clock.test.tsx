@@ -1,7 +1,7 @@
 import { render, screen, act } from '@testing-library/react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { __resetTimeStore } from '@/lib/hooks'
+import { __resetTimeStore } from '@/lib/hooks/useTime'
 import { IntlWrapper } from '@/test'
 
 import { Clock } from './Clock'

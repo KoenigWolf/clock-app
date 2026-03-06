@@ -8,7 +8,7 @@ build/
 coverage/
 
 # env
-.env*.local
+.env*
 
 # system
 .DS_Store

@@ -1,5 +1,5 @@
 import { Clock, ErrorBoundary, LanguageSwitcher } from '@/components'
-import { WebVitals } from '@/lib'
+import { WebVitals } from '@/lib/web-vitals'
 
 export default function Home() {
   return (
