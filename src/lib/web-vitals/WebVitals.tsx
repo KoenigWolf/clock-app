@@ -14,7 +14,8 @@ function reportWebVitals(metric: Metric) {
   })
 
   if (navigator.sendBeacon) {
-    navigator.sendBeacon('/api/web-vitals', body)
+    const payload = new Blob([body], { type: 'application/json' })
+    navigator.sendBeacon('/api/web-vitals', payload)
   } else {
     fetch('/api/web-vitals', {
       method: 'POST',
