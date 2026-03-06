@@ -16,7 +16,8 @@ export function LanguageSwitcher() {
   const pathname = usePathname()
 
   const handleLocaleChange = (newLocale: Locale) => {
-    const newPathname = pathname.replace(`/${locale}`, `/${newLocale}`)
+    const localePattern = new RegExp(`^/${locale}(?=/|$)`)
+    const newPathname = pathname.replace(localePattern, `/${newLocale}`)
     router.push(newPathname)
   }
 
@@ -32,7 +33,7 @@ export function LanguageSwitcher() {
               ? 'bg-white/20 text-white'
               : 'text-white/60 hover:bg-white/10 hover:text-white'
           }`}
-          aria-current={locale === loc ? 'true' : undefined}
+          aria-current={locale === loc ? 'page' : undefined}
         >
           {localeNames[loc]}
         </button>
