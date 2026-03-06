@@ -5,7 +5,8 @@ Next.js で作成されたシンプルなデジタル時計アプリです。
 ## 機能
 
 - リアルタイムで更新される時刻表示（毎秒更新）
-- 日本語形式の日付表示（年月日・曜日）
+- 日付表示（年月日・曜日）
+- 多言語対応（日本語・英語）
 - レスポンシブデザイン
 - アクセシビリティ対応（ARIA属性、スクリーンリーダー対応）
 - エラーバウンダリによる堅牢なエラーハンドリング
@@ -16,30 +17,54 @@ Next.js で作成されたシンプルなデジタル時計アプリです。
 - React 18
 - TypeScript (strict mode)
 - Tailwind CSS
+- next-intl (i18n)
 - Vitest + React Testing Library
+
+## 必要条件
+
+- Node.js 20.x 以上
+- npm 10.x 以上
 
 ## プロジェクト構造
 
-```
+```text
 src/
-├── app/                    # Next.js App Router
-│   ├── layout.tsx          # ルートレイアウト
-│   ├── page.tsx            # メインページ
-│   └── globals.css         # グローバルスタイル
-├── components/             # Reactコンポーネント
-│   ├── Clock.tsx           # 時計メインコンポーネント
-│   ├── TimeDisplay.tsx     # 時刻表示
-│   ├── DateDisplay.tsx     # 日付表示
-│   ├── ErrorBoundary.tsx   # エラーバウンダリ
-│   └── __tests__/          # コンポーネントテスト
-├── hooks/                  # カスタムフック
-│   └── useTime.ts          # 時刻管理フック
-├── utils/                  # ユーティリティ関数
-│   └── formatTime.ts       # 時刻フォーマット
-├── constants/              # 定数
-│   └── days.ts             # 曜日定義
-└── types/                  # 型定義
-    └── time.ts             # 時刻関連の型
+├── app/
+│   └── [locale]/
+│       ├── layout.tsx              # ルートレイアウト（i18n対応）
+│       └── page.tsx                # メインページ
+├── components/
+│   ├── __tests__/
+│   │   └── Clock.test.tsx          # Clockコンポーネントテスト
+│   ├── Clock.tsx                   # 時計メインコンポーネント
+│   ├── DateDisplay.tsx             # 日付表示
+│   ├── ErrorBoundary.tsx           # エラーバウンダリ
+│   ├── HoursMinutesDisplay.tsx     # 時・分表示
+│   ├── LanguageSwitcher.tsx        # 言語切替ボタン
+│   ├── SecondsDisplay.tsx          # 秒表示
+│   ├── TimeDisplay.tsx             # 時刻表示
+│   └── WebVitals.tsx               # パフォーマンス監視
+├── hooks/
+│   ├── __tests__/
+│   │   └── useTime.test.ts         # useTimeフックテスト
+│   └── useTime.ts                  # 時刻管理フック
+├── i18n/
+│   ├── config.ts                   # ロケール設定
+│   └── request.ts                  # next-intl設定
+├── test-utils/
+│   └── i18n.tsx                    # テスト用IntlWrapper
+├── types/
+│   ├── next-intl.d.ts              # next-intl型定義
+│   └── time.ts                     # 時刻関連の型
+├── utils/
+│   ├── __tests__/
+│   │   └── formatDate.test.ts      # formatDate関数テスト
+│   └── formatDate.ts               # 日付フォーマット
+├── middleware.ts                   # ロケールルーティング
+└── test-utils.d.ts                 # テスト型定義
+messages/
+├── en.json                         # 英語翻訳
+└── ja.json                         # 日本語翻訳
 ```
 
 ## アーキテクチャ
@@ -53,11 +78,6 @@ src/
 ### 状態管理
 
 時刻の更新は `useTime` フックで一元管理され、全てのサブスクライバーに効率的に配信されます。
-
-## 必要条件
-
-- Node.js 20.x 以上
-- npm 10.x 以上
 
 ## セットアップ
 

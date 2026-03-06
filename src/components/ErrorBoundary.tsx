@@ -1,20 +1,23 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { Component } from 'react'
 import type { ErrorInfo, ReactNode } from 'react'
 
-type Props = {
+type ErrorBoundaryInnerProps = {
   children: ReactNode
   fallback?: ReactNode
   logPrefix?: string
+  errorMessage: string
+  retryText: string
 }
 
 type State = {
   hasError: boolean
 }
 
-export class ErrorBoundary extends Component<Props, State> {
-  constructor(props: Props) {
+class ErrorBoundaryInner extends Component<ErrorBoundaryInnerProps, State> {
+  constructor(props: ErrorBoundaryInnerProps) {
     super(props)
     this.state = { hasError: false }
   }
@@ -33,13 +36,13 @@ export class ErrorBoundary extends Component<Props, State> {
       return (
         this.props.fallback ?? (
           <div className="text-center text-white/60">
-            <p>時計の表示中にエラーが発生しました</p>
+            <p>{this.props.errorMessage}</p>
             <button
               type="button"
               onClick={() => this.setState({ hasError: false })}
               className="mt-4 rounded border border-white/20 px-4 py-2 transition-colors hover:bg-white/10"
             >
-              再試行
+              {this.props.retryText}
             </button>
           </div>
         )
@@ -48,4 +51,34 @@ export class ErrorBoundary extends Component<Props, State> {
 
     return this.props.children
   }
+}
+
+type ErrorBoundaryProps = {
+  children: ReactNode
+  fallback?: ReactNode
+  logPrefix?: string
+}
+
+export function ErrorBoundary({
+  children,
+  fallback,
+  logPrefix,
+}: ErrorBoundaryProps) {
+  const t = useTranslations('error')
+
+  const innerProps: ErrorBoundaryInnerProps = {
+    children,
+    errorMessage: t('clockError'),
+    retryText: t('retry'),
+  }
+
+  if (fallback !== undefined) {
+    innerProps.fallback = fallback
+  }
+
+  if (logPrefix !== undefined) {
+    innerProps.logPrefix = logPrefix
+  }
+
+  return <ErrorBoundaryInner {...innerProps} />
 }

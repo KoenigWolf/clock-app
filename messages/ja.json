@@ -1,0 +1,33 @@
+{
+  "metadata": {
+    "title": "Clock",
+    "description": "シンプルな時計アプリ"
+  },
+  "weekdays": {
+    "sunday": "日",
+    "monday": "月",
+    "tuesday": "火",
+    "wednesday": "水",
+    "thursday": "木",
+    "friday": "金",
+    "saturday": "土"
+  },
+  "time": {
+    "currentTime": "現在時刻",
+    "hours": "時",
+    "minutes": "分",
+    "seconds": "秒",
+    "loading": "時刻を読み込み中",
+    "ariaLabel": "現在時刻 {hours}時{minutes}分{seconds}秒"
+  },
+  "date": {
+    "todaysDate": "今日の日付"
+  },
+  "error": {
+    "clockError": "時計の表示中にエラーが発生しました",
+    "retry": "再試行"
+  },
+  "languageSwitcher": {
+    "label": "言語"
+  }
+}
