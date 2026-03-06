@@ -1,9 +1,9 @@
 'use client'
 
-import { Globe } from 'lucide-react'
 import { usePathname, useRouter } from 'next/navigation'
 import { useLocale } from 'next-intl'
 
+import { EarthIcon } from '@/components/ui'
 import { locales, type Locale } from '@/lib'
 
 const LABELS: Record<Locale, string> = {
@@ -36,15 +36,11 @@ export function LanguageSwitcher() {
     <button
       type="button"
       onClick={handleToggle}
-      className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-border bg-background-overlay text-foreground-muted transition-colors hover:text-foreground"
+      className="group flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-border bg-background-overlay text-foreground-muted transition-colors hover:text-foreground"
       aria-label={`Switch language to ${LABELS[nextLocale]}`}
       title={`${LABELS[locale]} -> ${LABELS[nextLocale]}`}
     >
-      <Globe
-        strokeWidth={1.5}
-        aria-hidden="true"
-        className="h-[1.05rem] w-[1.05rem]"
-      />
+      <EarthIcon className="h-[1.05rem] w-[1.05rem] transition-[filter,opacity] duration-200 ease-out group-hover:opacity-100 group-hover:brightness-125" />
     </button>
   )
 }
