@@ -12,9 +12,6 @@
     "friday": "金",
     "saturday": "土"
   },
-  "dateFormat": {
-    "template": "{year}年{month}月{day}日 ({weekday})"
-  },
   "time": {
     "currentTime": "現在時刻",
     "hours": "時",

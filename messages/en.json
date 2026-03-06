@@ -12,9 +12,6 @@
     "friday": "Fri",
     "saturday": "Sat"
   },
-  "dateFormat": {
-    "template": "{weekday}, {monthName} {day}, {year}"
-  },
   "time": {
     "currentTime": "Current time",
     "hours": "hours",
