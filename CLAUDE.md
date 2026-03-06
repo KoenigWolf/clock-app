@@ -1,86 +1,175 @@
-# CLAUDE.md
+# Clock App
 
-## Commands
+> Minimal clock with golden ratio aesthetics
+
+---
+
+## Quick Reference
 
 ```text
-dev          build        test:run
-type-check   lint         format
+npm run dev          # development
+npm run build        # production build
+npm run test:run     # run tests
+npm run type-check   # TypeScript check
+npm run lint         # ESLint
+npm run format       # Prettier
 ```
 
-## Structure
+---
+
+## Architecture
 
 ```text
 src/
-├─ app/[locale]/     # routing only
-├─ components/{feature}/
-│  ├─ *.tsx, *.test.tsx, index.ts
+├─ app/[locale]/          # Next.js routing
+├─ components/
+│  └─ {feature}/          # Component + test + barrel
 ├─ lib/
-│  ├─ hooks/         # client-only, import from @/lib/hooks
-│  ├─ i18n/
-│  ├─ utils/
-│  ├─ web-vitals/    # client-only, import from @/lib/web-vitals
-│  └─ index.ts       # server-safe only
-├─ test/
-└─ types/
+│  ├─ hooks/              # [client] @/lib/hooks (types colocated)
+│  ├─ i18n/               # localization config
+│  ├─ utils/              # pure functions
+│  ├─ web-vitals/         # [client] @/lib/web-vitals
+│  └─ index.ts            # [server-safe] barrel
+├─ test/                  # test utilities + setup
+└─ types/                 # global declarations only
 ```
 
-## Imports
+### Import Paths
 
 ```typescript
-// ok
-import { X } from '@/components'
-import { x } from '@/lib'
-import { useX } from '@/lib/hooks' // client-only
-import { WebVitals } from '@/lib/web-vitals' // client-only
-import type { X } from '@/types'
-
-// ng
-import { useX } from '@/lib' // breaks server
-import { X } from '@/components/x/X' // use barrel
+import { Clock } from '@/components' // components
+import { formatLocalizedDate } from '@/lib' // server-safe utils
+import { useTime, type RawTimeState } from '@/lib/hooks' // client hooks + types
+import { WebVitals } from '@/lib/web-vitals' // client components
 ```
 
-## Rules
+---
 
-| Do                      | Don't                  |
-| ----------------------- | ---------------------- |
-| `type`                  | `interface`            |
-| `memo()`                | unnecessary re-renders |
-| semantic tokens         | hardcoded colors       |
-| relative imports in lib | `@/lib` in lib         |
-| barrel exports          | direct file imports    |
+## Code Style
 
-## Styling
+| Prefer                  | Avoid                   |
+| ----------------------- | ----------------------- |
+| `type`                  | `interface`             |
+| `memo()` components     | unnecessary re-renders  |
+| semantic color tokens   | hardcoded colors        |
+| relative imports in lib | circular `@/lib` in lib |
+| barrel exports          | deep file imports       |
 
-```typescript
-// ok: bg-background text-foreground text-foreground-muted
-// ng: bg-black text-white text-white/60 slate-900
-```
-
-## Patterns
+### Patterns
 
 ```typescript
-// memo
+// Component with memo
 export const X = memo(function X(props: Props) { })
 
-// hook
+// Shared state hook
 useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
 
 // i18n
-const t = useTranslations('ns')
+const t = useTranslations('namespace')
 
-// test
-<IntlWrapper locale="ja"><X /></IntlWrapper>
+// Test wrapper
+<IntlWrapper locale="ja"><Component /></IntlWrapper>
 ```
 
-## A11y
+### Styling
 
 ```typescript
-role="timer" aria-label={t('x')}
-@media (prefers-reduced-motion: reduce) { animation: none }
+// Semantic tokens
+bg-background  text-foreground  text-foreground-muted  border-border
+
+// Avoid
+bg-black  text-white  text-white/60  slate-900
 ```
 
-## Pre-submit
+---
+
+## Golden Ratio Design
+
+```text
+φ   = 1.618
+1/φ   = 0.618  ─  primary
+1/φ²  = 0.382  ─  secondary
+1/φ³  = 0.236  ─  tertiary
+```
+
+### Visual Anchor: Colon-Centered Layout
+
+```text
+┌─────────────────────────────────────┐
+│                                     │
+│                                     │
+│              10 : 30 ₄₅             │
+│                 ↑                   │
+│           ─ ─ ─ ┼ ─ ─ ─  center     │
+│                 ↓                   │
+│           Mon, Jan 15, 2024         │
+│                                     │
+│                                     │
+└─────────────────────────────────────┘
+```
+
+**Principle**: The colon ":" is the visual anchor, always centered on screen.
+
+| Element | Positioning | Reason                         |
+| ------- | ----------- | ------------------------------ |
+| HH:MM   | centered    | colon at exact screen center   |
+| :SS     | `absolute`  | doesn't affect colon centering |
+| Date    | flow below  | secondary info, follows anchor |
+
+```css
+/* Seconds: absolute so it doesn't shift the center */
+.seconds {
+  position: absolute;
+  left: 100%;
+}
+```
+
+### Typography Scale
+
+| Element | Size                              | Ratio |
+| ------- | --------------------------------- | ----- |
+| HH:MM   | `clamp(3.82rem, 16.18vw, 10rem)`  | 1     |
+| :SS     | `0.382em`                         | 1/φ²  |
+| Date    | `clamp(0.875rem, 2.36vw, 1.5rem)` | 1/φ³  |
+
+### Spacing & Layout
+
+| Element       | Value     | Derivation       |
+| ------------- | --------- | ---------------- |
+| Switcher pos  | `2.36%`   | 1/φ³ × 10        |
+| Colon margin  | `0.05em`  | subtle           |
+| Seconds gap   | `0.12em`  | clear separation |
+| Date margin   | `0.618em` | 1/φ              |
+| Date tracking | `0.032em` | time × φ         |
+
+### Animation & Effects
+
+| Property    | Value                              | Derivation |
+| ----------- | ---------------------------------- | ---------- |
+| Duration    | `1.618s`                           | φ          |
+| Easing      | `cubic-bezier(0.382, 0, 0.618, 1)` | 1/φ², 1/φ  |
+| Min opacity | `0.382`                            | 1/φ²       |
+| Glow spread | `1.618rem`                         | φ          |
+
+---
+
+## Accessibility
+
+```typescript
+role="timer"
+aria-label={t('currentTime')}
+```
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  animation: none;
+}
+```
+
+---
+
+## Pre-submit Checklist
 
 ```bash
-type-check && lint && test:run && build
+npm run type-check && npm run lint && npm run test:run && npm run build
 ```
