@@ -23,7 +23,7 @@ export function LanguageSwitcher() {
     <button
       type="button"
       onClick={handleToggle}
-      className="rounded-full p-[0.382rem] text-foreground-muted transition-colors hover:bg-background-overlay hover:text-foreground"
+      className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full text-foreground-muted transition-colors hover:bg-background-overlay hover:text-foreground"
       aria-label={`Switch to ${nextLocale === 'ja' ? '日本語' : 'English'}`}
       title={nextLocale === 'ja' ? '日本語' : 'English'}
     >
