@@ -1,6 +1,7 @@
 'use client'
 
 import { useLocale, useTranslations } from 'next-intl'
+import { useMemo } from 'react'
 
 import { useTime } from '@/hooks/useTime'
 import type { Locale } from '@/i18n/config'
@@ -15,6 +16,19 @@ export function Clock() {
   const time = useTime()
   const t = useTranslations()
   const locale = useLocale() as Locale
+
+  const weekdays = useMemo(
+    () => ({
+      sunday: t('weekdays.sunday'),
+      monday: t('weekdays.monday'),
+      tuesday: t('weekdays.tuesday'),
+      wednesday: t('weekdays.wednesday'),
+      thursday: t('weekdays.thursday'),
+      friday: t('weekdays.friday'),
+      saturday: t('weekdays.saturday'),
+    }),
+    [t]
+  )
 
   if (!time) {
     return (
@@ -31,16 +45,6 @@ export function Clock() {
         </div>
       </div>
     )
-  }
-
-  const weekdays = {
-    sunday: t('weekdays.sunday'),
-    monday: t('weekdays.monday'),
-    tuesday: t('weekdays.tuesday'),
-    wednesday: t('weekdays.wednesday'),
-    thursday: t('weekdays.thursday'),
-    friday: t('weekdays.friday'),
-    saturday: t('weekdays.saturday'),
   }
 
   const formattedDate = formatLocalizedDate(time.rawDate, locale, weekdays)
