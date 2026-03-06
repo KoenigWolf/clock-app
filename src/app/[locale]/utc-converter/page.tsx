@@ -1,14 +1,14 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { notFound } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
 
-import { HomeUtilityMenu } from '@/components'
-import { UtcConverter } from '@/components/seo/UtcConverter'
-import { type Locale } from '@/lib'
+import { HomeUtilityMenu, UtcConverter } from '@/components'
+import { locales, type Locale } from '@/lib'
 import { getSiteUrl } from '@/lib/site'
 
 type Props = {
-  params: { locale: string }
+  params: { locale: Locale }
 }
 
 export async function generateMetadata({
@@ -30,6 +30,10 @@ export async function generateMetadata({
 }
 
 export default async function UtcConverterPage({ params: { locale } }: Props) {
+  if (!locales.includes(locale)) {
+    notFound()
+  }
+
   const t = await getTranslations({
     locale,
     namespace: 'seoPages.utcConverter',
@@ -56,7 +60,7 @@ export default async function UtcConverterPage({ params: { locale } }: Props) {
             {t('description')}
           </p>
           <section className="mt-8">
-            <UtcConverter locale={locale as Locale} />
+            <UtcConverter locale={locale} />
           </section>
         </div>
       </section>

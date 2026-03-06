@@ -1,14 +1,14 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { notFound } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
 
-import { HomeUtilityMenu } from '@/components'
-import { WorldClockList } from '@/components/seo/WorldClockList'
-import { type Locale } from '@/lib'
+import { HomeUtilityMenu, WorldClockList } from '@/components'
+import { locales, type Locale } from '@/lib'
 import { getSiteUrl } from '@/lib/site'
 
 type Props = {
-  params: { locale: string }
+  params: { locale: Locale }
 }
 
 export async function generateMetadata({
@@ -27,6 +27,10 @@ export async function generateMetadata({
 }
 
 export default async function WorldClockPage({ params: { locale } }: Props) {
+  if (!locales.includes(locale)) {
+    notFound()
+  }
+
   const t = await getTranslations({ locale, namespace: 'seoPages.worldClock' })
 
   return (
@@ -50,7 +54,7 @@ export default async function WorldClockPage({ params: { locale } }: Props) {
             {t('description')}
           </p>
           <section className="mt-8">
-            <WorldClockList locale={locale as Locale} />
+            <WorldClockList locale={locale} />
           </section>
         </div>
       </section>

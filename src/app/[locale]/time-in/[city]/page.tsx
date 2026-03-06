@@ -3,14 +3,13 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
 
-import { HomeUtilityMenu } from '@/components'
-import { CityTimeCard } from '@/components/seo/CityTimeCard'
+import { CityTimeCard, HomeUtilityMenu } from '@/components'
 import { locales, type Locale } from '@/lib'
 import { getSiteUrl } from '@/lib/site'
 import { cityTimeZones, findCityBySlug } from '@/lib/timezones'
 
 type Props = {
-  params: { locale: string; city: string }
+  params: { locale: Locale; city: string }
 }
 
 export function generateStaticParams() {
@@ -28,7 +27,7 @@ export async function generateMetadata({
   }
 
   const t = await getTranslations({ locale, namespace: 'seoPages.timeInCity' })
-  const cityName = cityInfo.names[locale as Locale] ?? cityInfo.names.en
+  const cityName = cityInfo.names[locale] ?? cityInfo.names.en
   const title = t('title', { city: cityName })
   const description = t('description', {
     city: cityName,
@@ -53,7 +52,7 @@ export default async function TimeInCityPage({
   }
 
   const t = await getTranslations({ locale, namespace: 'seoPages.timeInCity' })
-  const cityName = cityInfo.names[locale as Locale] ?? cityInfo.names.en
+  const cityName = cityInfo.names[locale] ?? cityInfo.names.en
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
@@ -94,10 +93,7 @@ export default async function TimeInCityPage({
               })}
             </p>
             <section className="mt-8">
-              <CityTimeCard
-                locale={locale as Locale}
-                timeZone={cityInfo.timeZone}
-              />
+              <CityTimeCard locale={locale} timeZone={cityInfo.timeZone} />
             </section>
           </div>
         </section>
