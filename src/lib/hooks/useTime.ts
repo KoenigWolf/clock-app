@@ -1,6 +1,14 @@
 import { useSyncExternalStore } from 'react'
 
-import type { RawTimeState } from '@/types'
+type TimeDigits = {
+  hours: string
+  minutes: string
+  seconds: string
+}
+
+export type RawTimeState = TimeDigits & {
+  rawDate: Date
+}
 
 let currentTime: RawTimeState | null = null
 let listeners: Set<() => void> = new Set()

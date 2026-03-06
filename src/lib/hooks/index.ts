@@ -1,1 +1,1 @@
-export { useTime } from './useTime'
+export { useTime, type RawTimeState } from './useTime'

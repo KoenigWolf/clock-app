@@ -23,11 +23,15 @@ export function LanguageSwitcher() {
     <button
       type="button"
       onClick={handleToggle}
-      className="rounded-full p-2 text-foreground-muted transition-colors hover:bg-background-overlay hover:text-foreground"
+      className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full text-foreground-muted transition-colors hover:bg-background-overlay hover:text-foreground"
       aria-label={`Switch to ${nextLocale === 'ja' ? '日本語' : 'English'}`}
       title={nextLocale === 'ja' ? '日本語' : 'English'}
     >
-      <Globe size={20} strokeWidth={1.5} aria-hidden="true" />
+      <Globe
+        strokeWidth={1.5}
+        aria-hidden="true"
+        className="h-[1.236rem] w-[1.236rem]"
+      />
     </button>
   )
 }
