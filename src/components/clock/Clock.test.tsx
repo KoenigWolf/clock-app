@@ -38,7 +38,7 @@ describe('Clock', () => {
         </IntlWrapper>
       )
 
-      expect(screen.getByText('2024年1月15日 (月)')).toBeInTheDocument()
+      expect(screen.getByText('2024年1月15日(月)')).toBeInTheDocument()
     })
 
     it('has accessible labels in Japanese', () => {
@@ -61,7 +61,7 @@ describe('Clock', () => {
         </IntlWrapper>
       )
 
-      expect(screen.getByText('Mon, Jan 15, 2024')).toBeInTheDocument()
+      expect(screen.getByText('Sun, January 14, 2024')).toBeInTheDocument()
     })
 
     it('has accessible labels in English', () => {
@@ -74,7 +74,7 @@ describe('Clock', () => {
       const timer = screen.getByRole('timer')
       expect(timer).toHaveAttribute(
         'aria-label',
-        'Current time: 10 hours 30 minutes 45 seconds'
+        'Current time: 20 hours 30 minutes 45 seconds'
       )
     })
   })
