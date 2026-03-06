@@ -7,10 +7,12 @@ import { IntlWrapper } from '@/test'
 import { Clock } from './Clock'
 
 describe('Clock', () => {
+  const fixedInstant = new Date('2024-01-15T01:30:45.000Z')
+
   beforeEach(() => {
     __resetTimeStore()
     vi.useFakeTimers()
-    vi.setSystemTime(new Date(2024, 0, 15, 10, 30, 45, 0))
+    vi.setSystemTime(fixedInstant)
   })
 
   afterEach(() => {
@@ -89,7 +91,7 @@ describe('Clock', () => {
     expect(screen.getByText('45')).toBeInTheDocument()
 
     act(() => {
-      vi.setSystemTime(new Date(2024, 0, 15, 10, 30, 46, 0))
+      vi.setSystemTime(new Date('2024-01-15T01:30:46.000Z'))
       vi.advanceTimersByTime(100)
     })
 
