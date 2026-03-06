@@ -19,7 +19,6 @@ export default function OpenGraphImage() {
         justifyContent: 'center',
         background:
           'radial-gradient(circle at 28% 18%, rgba(255,255,255,0.22), transparent 36%), linear-gradient(145deg, #081326 8%, #11396f 56%, #0f8f89 100%)',
-        gap: 34,
       }}
     >
       <div
@@ -77,28 +76,6 @@ export default function OpenGraphImage() {
             backgroundColor: '#FFFFFF',
           }}
         />
-      </div>
-      <div
-        style={{
-          color: 'rgba(255, 255, 255, 0.94)',
-          fontSize: 66,
-          fontWeight: 600,
-          fontFamily: 'system-ui, sans-serif',
-          letterSpacing: '-0.02em',
-        }}
-      >
-        Clock App
-      </div>
-      <div
-        style={{
-          color: 'rgba(255, 255, 255, 0.72)',
-          fontSize: 32,
-          fontWeight: 400,
-          fontFamily: 'system-ui, sans-serif',
-          letterSpacing: '0.02em',
-        }}
-      >
-        Minimal. Global. Precise.
       </div>
     </div>,
     { ...size }
