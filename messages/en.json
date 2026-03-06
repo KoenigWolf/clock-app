@@ -32,7 +32,22 @@
     "retry": "Retry"
   },
   "languageSwitcher": {
-    "label": "Language"
+    "label": "Language",
+    "switchTo": "Switch language to {language}",
+    "fromTo": "{current} -> {next}",
+    "languages": {
+      "ja": "Japanese",
+      "en": "English",
+      "es": "Spanish",
+      "pt": "Portuguese",
+      "fr": "French",
+      "de": "German",
+      "hi": "Hindi"
+    }
+  },
+  "menu": {
+    "open": "Open menu",
+    "close": "Close menu"
   },
   "seoPages": {
     "home": {
@@ -51,7 +66,9 @@
       "title": "UTC Converter | Convert UTC to Local City Time",
       "heading": "UTC Converter",
       "description": "Convert a UTC datetime to local time across global cities in one place.",
-      "backToHome": "Back to clock home"
+      "backToHome": "Back to clock home",
+      "utcDateTime": "UTC Date Time",
+      "invalidDatetime": "Invalid datetime value"
     },
     "timeInCity": {
       "title": "Current Time in {city} | Digital Clock",

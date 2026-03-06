@@ -1,6 +1,7 @@
 'use client'
 
 import { useLocale, useTranslations } from 'next-intl'
+import { memo } from 'react'
 
 import { defaultLocale, localeTimeZones, locales, type Locale } from '@/lib'
 import { useTime } from '@/lib/hooks'
@@ -10,7 +11,7 @@ import { TimeDisplay } from './TimeDisplay'
 
 const LOADING_PLACEHOLDER = '--:--:--'
 
-export function Clock() {
+export const Clock = memo(function Clock() {
   const time = useTime()
   const t = useTranslations()
   const rawLocale = useLocale()
@@ -59,9 +60,15 @@ export function Clock() {
   }).format(time.rawDate)
 
   return (
-    <div className="select-none text-center">
+    <div
+      className="select-none text-center"
+      role="timer"
+      aria-label={t('time.ariaLabel', { hours, minutes, seconds })}
+    >
       <TimeDisplay hours={hours} minutes={minutes} seconds={seconds} />
       <DateDisplay date={formattedDate} />
     </div>
   )
-}
+})
+
+Clock.displayName = 'Clock'

@@ -32,7 +32,18 @@
     "retry": "फिर प्रयास करें"
   },
   "languageSwitcher": {
-    "label": "भाषा"
+    "label": "भाषा",
+    "switchTo": "भाषा {language} में बदलें",
+    "fromTo": "{current} -> {next}",
+    "languages": {
+      "ja": "जापानी",
+      "en": "अंग्रेज़ी",
+      "es": "स्पेनिश",
+      "pt": "पुर्तगाली",
+      "fr": "फ्रेंच",
+      "de": "जर्मन",
+      "hi": "हिन्दी"
+    }
   },
   "seoPages": {
     "home": {
@@ -51,7 +62,9 @@
       "title": "UTC कन्वर्टर | UTC से स्थानीय समय",
       "heading": "UTC कन्वर्टर",
       "description": "UTC दिनांक और समय को वैश्विक शहरों के स्थानीय समय में बदलें।",
-      "backToHome": "होम पर वापस जाएँ"
+      "backToHome": "होम पर वापस जाएँ",
+      "utcDateTime": "UTC दिनांक और समय",
+      "invalidDatetime": "अमान्य दिनांक/समय मान"
     },
     "timeInCity": {
       "title": "{city} में वर्तमान समय | डिजिटल घड़ी",
@@ -59,5 +72,9 @@
       "description": "{city} ({timezone}) का लाइव स्थानीय समय।",
       "backToWorldClock": "विश्व घड़ी पर वापस जाएँ"
     }
+  },
+  "menu": {
+    "open": "मेनू खोलें",
+    "close": "मेनू बंद करें"
   }
 }

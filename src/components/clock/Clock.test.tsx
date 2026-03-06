@@ -40,7 +40,15 @@ describe('Clock', () => {
         </IntlWrapper>
       )
 
-      expect(screen.getByText('2024年1月15日(月)')).toBeInTheDocument()
+      const expectedDate = new Intl.DateTimeFormat('ja-JP', {
+        timeZone: 'Asia/Tokyo',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        weekday: 'short',
+      }).format(fixedInstant)
+
+      expect(screen.getByText(expectedDate)).toBeInTheDocument()
     })
 
     it('has accessible labels in Japanese', () => {

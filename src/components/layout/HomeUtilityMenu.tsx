@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useLocale, useTranslations } from 'next-intl'
-import { useState } from 'react'
+import { memo, useState } from 'react'
 
 import {
   CloseIcon,
@@ -13,10 +13,11 @@ import {
 
 import { LanguageSwitcher } from './LanguageSwitcher'
 
-export function HomeUtilityMenu() {
+export const HomeUtilityMenu = memo(function HomeUtilityMenu() {
   const [open, setOpen] = useState(false)
   const locale = useLocale()
   const t = useTranslations('seoPages.home')
+  const tMenu = useTranslations('menu')
 
   return (
     <div className="absolute right-[2.36%] top-[2.36%] z-20 flex flex-col items-end">
@@ -26,8 +27,8 @@ export function HomeUtilityMenu() {
           type="button"
           onClick={() => setOpen((prev) => !prev)}
           className="group flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-border bg-background-overlay text-foreground-muted transition-colors hover:text-foreground"
-          aria-label={open ? 'Close menu' : 'Open menu'}
-          title={open ? 'Close menu' : 'Open menu'}
+          aria-label={open ? tMenu('close') : tMenu('open')}
+          title={open ? tMenu('close') : tMenu('open')}
         >
           {open ? (
             <CloseIcon className="h-[1.05rem] w-[1.05rem] transition-[filter,opacity] duration-200 ease-out group-hover:opacity-100 group-hover:brightness-125" />
@@ -65,4 +66,6 @@ export function HomeUtilityMenu() {
       ) : null}
     </div>
   )
-}
+})
+
+HomeUtilityMenu.displayName = 'HomeUtilityMenu'

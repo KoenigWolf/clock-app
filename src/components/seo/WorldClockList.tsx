@@ -1,7 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useTranslations } from 'next-intl'
+import { memo, useEffect, useState } from 'react'
 
 import type { Locale } from '@/lib'
 import { cityTimeZones } from '@/lib/timezones'
@@ -20,7 +21,8 @@ function formatTime(timeZone: string, locale: Locale): string {
   }).format(new Date())
 }
 
-export function WorldClockList({ locale }: Props) {
+export const WorldClockList = memo(function WorldClockList({ locale }: Props) {
+  const t = useTranslations('time')
   const [, setTick] = useState(0)
 
   useEffect(() => {
@@ -50,10 +52,18 @@ export function WorldClockList({ locale }: Props) {
                 {city.timeZone}
               </p>
             </div>
-            <span className="font-mono text-foreground-muted">{city.time}</span>
+            <span
+              className="font-mono text-foreground-muted"
+              role="timer"
+              aria-label={`${t('currentTime')} ${city.time}`}
+            >
+              {city.time}
+            </span>
           </Link>
         </li>
       ))}
     </ul>
   )
-}
+})
+
+WorldClockList.displayName = 'WorldClockList'

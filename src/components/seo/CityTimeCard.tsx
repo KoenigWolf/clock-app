@@ -1,6 +1,7 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useTranslations } from 'next-intl'
+import { memo, useEffect, useState } from 'react'
 
 import type { Locale } from '@/lib'
 
@@ -9,7 +10,11 @@ type Props = {
   timeZone: string
 }
 
-export function CityTimeCard({ locale, timeZone }: Props) {
+export const CityTimeCard = memo(function CityTimeCard({
+  locale,
+  timeZone,
+}: Props) {
+  const t = useTranslations('time')
   const [, setTick] = useState(0)
 
   useEffect(() => {
@@ -36,7 +41,11 @@ export function CityTimeCard({ locale, timeZone }: Props) {
 
   return (
     <div className="rounded-2xl border border-border bg-background p-6 text-center">
-      <p className="font-mono text-[clamp(2.2rem,9vw,4rem)] leading-none text-foreground">
+      <p
+        className="font-mono text-[clamp(2.2rem,9vw,4rem)] leading-none text-foreground"
+        role="timer"
+        aria-label={`${t('currentTime')} ${time}`}
+      >
         {time}
       </p>
       <p className="mt-3 text-sm text-foreground-muted">{date}</p>
@@ -45,4 +54,6 @@ export function CityTimeCard({ locale, timeZone }: Props) {
       </p>
     </div>
   )
-}
+})
+
+CityTimeCard.displayName = 'CityTimeCard'

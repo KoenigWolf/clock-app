@@ -32,7 +32,18 @@
     "retry": "Reintentar"
   },
   "languageSwitcher": {
-    "label": "Idioma"
+    "label": "Idioma",
+    "switchTo": "Cambiar idioma a {language}",
+    "fromTo": "{current} -> {next}",
+    "languages": {
+      "ja": "Japonés",
+      "en": "Inglés",
+      "es": "Español",
+      "pt": "Portugués",
+      "fr": "Francés",
+      "de": "Alemán",
+      "hi": "Hindi"
+    }
   },
   "seoPages": {
     "home": {
@@ -51,7 +62,9 @@
       "title": "Conversor UTC | UTC a hora local",
       "heading": "Conversor UTC",
       "description": "Convierte una fecha y hora UTC a la hora local de ciudades globales.",
-      "backToHome": "Volver al inicio"
+      "backToHome": "Volver al inicio",
+      "utcDateTime": "Fecha y hora UTC",
+      "invalidDatetime": "Valor de fecha y hora no válido"
     },
     "timeInCity": {
       "title": "Hora actual en {city} | Reloj digital",
@@ -59,5 +72,9 @@
       "description": "Hora local en vivo de {city} ({timezone}).",
       "backToWorldClock": "Volver al reloj mundial"
     }
+  },
+  "menu": {
+    "open": "Abrir menú",
+    "close": "Cerrar menú"
   }
 }

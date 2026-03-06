@@ -1,8 +1,9 @@
+import { memo } from 'react'
 import type { SVGProps } from 'react'
 
 type IconProps = SVGProps<SVGSVGElement>
 
-export function EarthIcon(props: IconProps) {
+export const EarthIcon = memo(function EarthIcon(props: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
       <circle cx="12" cy="12" r="8.5" stroke="currentColor" strokeWidth="1.7" />
@@ -16,9 +17,10 @@ export function EarthIcon(props: IconProps) {
       />
     </svg>
   )
-}
+})
+EarthIcon.displayName = 'EarthIcon'
 
-export function MenuIcon(props: IconProps) {
+export const MenuIcon = memo(function MenuIcon(props: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
       <rect x="4.5" y="5" width="15" height="3" rx="1.5" fill="currentColor" />
@@ -42,9 +44,10 @@ export function MenuIcon(props: IconProps) {
       />
     </svg>
   )
-}
+})
+MenuIcon.displayName = 'MenuIcon'
 
-export function CloseIcon(props: IconProps) {
+export const CloseIcon = memo(function CloseIcon(props: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
       <path
@@ -55,9 +58,10 @@ export function CloseIcon(props: IconProps) {
       />
     </svg>
   )
-}
+})
+CloseIcon.displayName = 'CloseIcon'
 
-export function WorldClockIcon(props: IconProps) {
+export const WorldClockIcon = memo(function WorldClockIcon(props: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
       <circle cx="12" cy="12" r="8.5" stroke="currentColor" strokeWidth="1.7" />
@@ -77,9 +81,12 @@ export function WorldClockIcon(props: IconProps) {
       <circle cx="12" cy="12" r="1.2" fill="currentColor" />
     </svg>
   )
-}
+})
+WorldClockIcon.displayName = 'WorldClockIcon'
 
-export function UtcConverterIcon(props: IconProps) {
+export const UtcConverterIcon = memo(function UtcConverterIcon(
+  props: IconProps
+) {
   return (
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
       <rect
@@ -109,9 +116,10 @@ export function UtcConverterIcon(props: IconProps) {
       />
     </svg>
   )
-}
+})
+UtcConverterIcon.displayName = 'UtcConverterIcon'
 
-export function CityTimeIcon(props: IconProps) {
+export const CityTimeIcon = memo(function CityTimeIcon(props: IconProps) {
   return (
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
       <path
@@ -135,4 +143,5 @@ export function CityTimeIcon(props: IconProps) {
       />
     </svg>
   )
-}
+})
+CityTimeIcon.displayName = 'CityTimeIcon'

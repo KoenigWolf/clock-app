@@ -1,6 +1,7 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useTranslations } from 'next-intl'
+import { memo, useMemo, useState } from 'react'
 
 import type { Locale } from '@/lib'
 import { cityTimeZones } from '@/lib/timezones'
@@ -15,7 +16,8 @@ function toInputValue(date: Date): string {
   return local.toISOString().slice(0, 16)
 }
 
-export function UtcConverter({ locale }: Props) {
+export const UtcConverter = memo(function UtcConverter({ locale }: Props) {
+  const t = useTranslations('seoPages.utcConverter')
   const [input, setInput] = useState<string>(toInputValue(new Date()))
 
   const utcDate = useMemo(() => {
@@ -29,7 +31,7 @@ export function UtcConverter({ locale }: Props) {
         className="block text-xs uppercase tracking-wider text-foreground-muted"
         htmlFor="utc-input"
       >
-        UTC Date Time
+        {t('utcDateTime')}
       </label>
       <input
         id="utc-input"
@@ -71,9 +73,11 @@ export function UtcConverter({ locale }: Props) {
         </ul>
       ) : (
         <p className="mt-4 text-sm text-foreground-muted">
-          Invalid datetime value
+          {t('invalidDatetime')}
         </p>
       )}
     </div>
   )
-}
+})
+
+UtcConverter.displayName = 'UtcConverter'
