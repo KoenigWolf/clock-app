@@ -1,7 +1,11 @@
 {
   "metadata": {
-    "title": "Clock",
-    "description": "A simple clock app"
+    "title": "Online Digital Clock | Real-time Local Time",
+    "description": "A minimalist online digital clock that updates every second. Check local time instantly in Japanese or English.",
+    "appName": "Clock App",
+    "siteName": "Clock App",
+    "ogImageAlt": "Clock App preview image showing digital time",
+    "keywords": "online clock,digital clock,local time,current time,real-time clock,japanese clock,english clock"
   },
   "weekdays": {
     "sunday": "Sun",

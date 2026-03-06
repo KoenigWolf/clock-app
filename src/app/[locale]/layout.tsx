@@ -5,6 +5,7 @@ import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, getTranslations } from 'next-intl/server'
 
 import { locales, type Locale } from '@/lib'
+import { getSiteUrl } from '@/lib/site'
 
 import '../globals.css'
 
@@ -24,15 +25,60 @@ export async function generateMetadata({
   params: { locale },
 }: Props): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: 'metadata' })
+  const siteUrl = getSiteUrl()
+  const keywords = t('keywords')
+    .split(',')
+    .map((keyword) => keyword.trim())
+    .filter(Boolean)
+  const ogLocale = locale === 'ja' ? 'ja_JP' : 'en_US'
+  const alternateLocale = locale === 'ja' ? 'en_US' : 'ja_JP'
 
   return {
+    metadataBase: new URL(siteUrl),
+    applicationName: t('appName'),
     title: t('title'),
     description: t('description'),
-    robots: 'index, follow',
+    keywords,
+    alternates: {
+      canonical: `/${locale}`,
+      languages: {
+        ja: '/ja',
+        en: '/en',
+      },
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+        'max-video-preview': -1,
+      },
+    },
     openGraph: {
       title: t('title'),
       description: t('description'),
+      url: `/${locale}`,
+      siteName: t('siteName'),
+      locale: ogLocale,
+      alternateLocale,
       type: 'website',
+      images: [
+        {
+          url: '/opengraph-image',
+          width: 1200,
+          height: 630,
+          alt: t('ogImageAlt'),
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: t('title'),
+      description: t('description'),
+      images: ['/opengraph-image'],
     },
   }
 }
