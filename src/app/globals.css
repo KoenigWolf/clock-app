@@ -69,7 +69,7 @@
 
 @layer components {
   .colon-pulse {
-    animation: colon-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    animation: colon-pulse 1.618s cubic-bezier(0.382, 0, 0.618, 1) infinite;
     will-change: opacity;
   }
 
@@ -79,7 +79,7 @@
       opacity: 1;
     }
     50% {
-      opacity: 0.5;
+      opacity: 0.382;
     }
   }
 }

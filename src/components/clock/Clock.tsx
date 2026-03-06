@@ -40,7 +40,7 @@ export function Clock() {
         aria-label={t('time.loading')}
       >
         <div
-          className="text-8xl font-extralight text-foreground-disabled"
+          className="text-[clamp(3.82rem,16.18vw,10rem)] font-extralight tracking-[0.02em] text-foreground-disabled"
           aria-hidden="true"
         >
           {LOADING_PLACEHOLDER}

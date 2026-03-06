@@ -21,7 +21,7 @@ const config: Config = {
         },
       },
       dropShadow: {
-        glow: '0 0 30px hsl(var(--color-shadow))',
+        glow: '0 0 1.618rem hsl(var(--color-shadow))',
       },
     },
   },
