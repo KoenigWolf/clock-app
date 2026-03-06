@@ -30,6 +30,7 @@ export default async function Home({ params: { locale } }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <main className="relative flex min-h-screen items-center justify-center bg-background">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_12%,rgba(255,255,255,0.1),transparent_42%)]" />
         <WebVitals />
         <h1 className="sr-only">{t('title')}</h1>
         <p className="sr-only">{t('description')}</p>

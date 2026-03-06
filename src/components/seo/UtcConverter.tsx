@@ -24,9 +24,9 @@ export function UtcConverter({ locale }: Props) {
   }, [input])
 
   return (
-    <div className="rounded-2xl border border-border bg-background-overlay p-6">
+    <div className="rounded-2xl border border-border bg-background p-5 sm:p-6">
       <label
-        className="block text-sm text-foreground-muted"
+        className="block text-xs uppercase tracking-wider text-foreground-muted"
         htmlFor="utc-input"
       >
         UTC Date Time
@@ -36,7 +36,7 @@ export function UtcConverter({ locale }: Props) {
         type="datetime-local"
         value={input}
         onChange={(event) => setInput(event.target.value)}
-        className="mt-2 w-full rounded-lg border border-border bg-transparent px-3 py-2 text-foreground outline-none"
+        className="mt-2 w-full rounded-lg border border-border bg-background-overlay px-3 py-2 text-foreground outline-none transition-colors focus:border-foreground-muted"
       />
 
       {utcDate ? (
@@ -56,7 +56,7 @@ export function UtcConverter({ locale }: Props) {
             return (
               <li
                 key={city.slug}
-                className="rounded-lg border border-border p-3"
+                className="rounded-lg border border-border bg-background-overlay p-3"
               >
                 <p className="text-sm text-foreground">{city.names[locale]}</p>
                 <p className="mt-1 text-xs text-foreground-muted">

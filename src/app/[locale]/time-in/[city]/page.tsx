@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getTranslations } from 'next-intl/server'
 
+import { HomeUtilityMenu } from '@/components'
 import { CityTimeCard } from '@/components/seo/CityTimeCard'
 import { locales, type Locale } from '@/lib'
 import { getSiteUrl } from '@/lib/site'
@@ -70,26 +71,35 @@ export default async function TimeInCityPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <main className="mx-auto min-h-screen w-full max-w-3xl px-4 py-10 sm:px-6">
-        <nav className="mb-6 text-sm text-foreground-muted">
-          <Link
-            href={`/${locale}/world-clock`}
-            className="hover:text-foreground"
-          >
-            {t('backToWorldClock')}
-          </Link>
-        </nav>
-        <h1 className="text-3xl font-semibold tracking-tight text-foreground">
-          {t('heading', { city: cityName })}
-        </h1>
-        <p className="mt-3 text-foreground-muted">
-          {t('description', { city: cityName, timezone: cityInfo.timeZone })}
-        </p>
-        <section className="mt-8">
-          <CityTimeCard
-            locale={locale as Locale}
-            timeZone={cityInfo.timeZone}
-          />
+      <main className="relative min-h-screen bg-background">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_12%,rgba(255,255,255,0.1),transparent_42%)]" />
+        <HomeUtilityMenu />
+        <section className="relative mx-auto w-full max-w-5xl px-4 py-16 sm:px-6">
+          <div className="rounded-[1.5rem] border border-border bg-background-overlay p-6 backdrop-blur-[2px] sm:p-8">
+            <nav className="mb-5 text-sm text-foreground-muted">
+              <Link
+                href={`/${locale}/world-clock`}
+                className="inline-flex rounded-full border border-border px-3 py-1 transition-colors hover:bg-background-overlay-strong hover:text-foreground"
+              >
+                {t('backToWorldClock')}
+              </Link>
+            </nav>
+            <h1 className="text-3xl font-semibold tracking-tight text-foreground">
+              {t('heading', { city: cityName })}
+            </h1>
+            <p className="mt-3 text-foreground-muted">
+              {t('description', {
+                city: cityName,
+                timezone: cityInfo.timeZone,
+              })}
+            </p>
+            <section className="mt-8">
+              <CityTimeCard
+                locale={locale as Locale}
+                timeZone={cityInfo.timeZone}
+              />
+            </section>
+          </div>
         </section>
       </main>
     </>

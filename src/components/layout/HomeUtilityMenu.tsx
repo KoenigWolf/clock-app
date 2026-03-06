@@ -5,7 +5,6 @@ import { useLocale, useTranslations } from 'next-intl'
 import { useState } from 'react'
 
 import {
-  CityTimeIcon,
   CloseIcon,
   MenuIcon,
   UtcConverterIcon,
@@ -59,16 +58,6 @@ export function HomeUtilityMenu() {
               >
                 <UtcConverterIcon className="h-4 w-4 transition-[filter,opacity] duration-200 ease-out group-hover:opacity-100 group-hover:brightness-125" />
                 {t('utcConverter')}
-              </Link>
-            </li>
-            <li>
-              <Link
-                href={`/${locale}/time-in/tokyo`}
-                className="group flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-foreground-muted transition-colors hover:bg-background-overlay hover:text-foreground"
-                onClick={() => setOpen(false)}
-              >
-                <CityTimeIcon className="h-4 w-4 transition-[filter,opacity] duration-200 ease-out group-hover:opacity-100 group-hover:brightness-125" />
-                {t('timeInCity')}
               </Link>
             </li>
           </ul>

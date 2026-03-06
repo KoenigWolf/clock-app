@@ -36,12 +36,20 @@ export function WorldClockList({ locale }: Props) {
   return (
     <ul className="grid gap-3 sm:grid-cols-2">
       {rows.map((city) => (
-        <li key={city.slug} className="rounded-xl border border-border p-3">
+        <li
+          key={city.slug}
+          className="rounded-xl border border-border bg-background p-3 transition-colors hover:bg-background-overlay"
+        >
           <Link
             href={`/${locale}/time-in/${city.slug}`}
             className="flex items-center justify-between gap-3"
           >
-            <span className="text-foreground">{city.names[locale]}</span>
+            <div className="min-w-0">
+              <p className="truncate text-foreground">{city.names[locale]}</p>
+              <p className="truncate text-xs text-foreground-muted">
+                {city.timeZone}
+              </p>
+            </div>
             <span className="font-mono text-foreground-muted">{city.time}</span>
           </Link>
         </li>

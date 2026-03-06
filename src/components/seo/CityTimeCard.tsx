@@ -35,12 +35,12 @@ export function CityTimeCard({ locale, timeZone }: Props) {
   }).format(now)
 
   return (
-    <div className="rounded-2xl border border-border bg-background-overlay p-6 text-center">
+    <div className="rounded-2xl border border-border bg-background p-6 text-center">
       <p className="font-mono text-[clamp(2.2rem,9vw,4rem)] leading-none text-foreground">
         {time}
       </p>
       <p className="mt-3 text-sm text-foreground-muted">{date}</p>
-      <p className="mt-2 text-xs uppercase tracking-wider text-foreground-muted">
+      <p className="mt-3 inline-flex rounded-full border border-border bg-background-overlay px-3 py-1 text-[0.65rem] uppercase tracking-wider text-foreground-muted">
         {timeZone}
       </p>
     </div>
