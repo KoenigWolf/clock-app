@@ -9,7 +9,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: 'Clock App',
     short_name: 'Clock',
     description: 'Minimal online digital clock with real-time updates.',
-    start_url: '/ja',
+    start_url: '/',
     scope: '/',
     display: 'standalone',
     background_color: '#000000',
@@ -28,7 +28,7 @@ export default function manifest(): MetadataRoute.Manifest {
         type: 'image/png',
       },
     ],
-    id: `${siteUrl}/ja`,
+    id: `${siteUrl}/`,
     categories: ['utilities', 'productivity'],
   }
 }

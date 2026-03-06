@@ -21,6 +21,16 @@ type Props = {
   params: { locale: string }
 }
 
+const OG_LOCALE_MAP: Record<Locale, string> = {
+  ja: 'ja_JP',
+  en: 'en_US',
+  es: 'es_ES',
+  pt: 'pt_BR',
+  fr: 'fr_FR',
+  de: 'de_DE',
+  hi: 'hi_IN',
+}
+
 export async function generateMetadata({
   params: { locale },
 }: Props): Promise<Metadata> {
@@ -30,8 +40,27 @@ export async function generateMetadata({
     .split(',')
     .map((keyword) => keyword.trim())
     .filter(Boolean)
-  const ogLocale = locale === 'ja' ? 'ja_JP' : 'en_US'
-  const alternateLocale = locale === 'ja' ? 'en_US' : 'ja_JP'
+  const currentLocale = locale as Locale
+  const ogLocale = OG_LOCALE_MAP[currentLocale]
+  const alternateLocale = locales
+    .filter((entry) => entry !== currentLocale)
+    .map((entry) => OG_LOCALE_MAP[entry])
+  const languageAlternates = Object.fromEntries(
+    locales.map((entry) => [entry, `/${entry}`])
+  )
+  const googleSiteVerification =
+    process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+  const bingSiteVerification = process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION
+  const verification = {
+    ...(googleSiteVerification ? { google: googleSiteVerification } : {}),
+    ...(bingSiteVerification
+      ? {
+          other: {
+            'msvalidate.01': bingSiteVerification,
+          },
+        }
+      : {}),
+  }
 
   return {
     metadataBase: new URL(siteUrl),
@@ -41,10 +70,7 @@ export async function generateMetadata({
     keywords,
     alternates: {
       canonical: `/${locale}`,
-      languages: {
-        ja: '/ja',
-        en: '/en',
-      },
+      languages: languageAlternates,
     },
     robots: {
       index: true,
@@ -80,6 +106,7 @@ export async function generateMetadata({
       description: t('description'),
       images: ['/opengraph-image'],
     },
+    verification,
   }
 }
 

@@ -33,5 +33,31 @@
   },
   "languageSwitcher": {
     "label": "言語"
+  },
+  "seoPages": {
+    "home": {
+      "heading": "時刻ツール",
+      "worldClock": "世界時計",
+      "utcConverter": "UTC変換",
+      "timeInCity": "東京の時刻"
+    },
+    "worldClock": {
+      "title": "世界時計 | 主要都市の現在時刻",
+      "heading": "世界時計",
+      "description": "世界の主要都市の現在時刻をリアルタイムで表示します。1秒ごとに更新されます。",
+      "backToHome": "ホームへ戻る"
+    },
+    "utcConverter": {
+      "title": "UTC変換 | UTCから各都市の時刻へ変換",
+      "heading": "UTC変換",
+      "description": "UTC日時を入力して、世界各都市のローカル時刻へ変換します。",
+      "backToHome": "ホームへ戻る"
+    },
+    "timeInCity": {
+      "title": "{city}の現在時刻 | デジタル時計",
+      "heading": "{city}の現在時刻",
+      "description": "{city}（{timezone}）の現在時刻をリアルタイム表示します。",
+      "backToWorldClock": "世界時計へ戻る"
+    }
   }
 }

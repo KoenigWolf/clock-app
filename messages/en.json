@@ -33,5 +33,31 @@
   },
   "languageSwitcher": {
     "label": "Language"
+  },
+  "seoPages": {
+    "home": {
+      "heading": "Explore time tools",
+      "worldClock": "World Clock",
+      "utcConverter": "UTC Converter",
+      "timeInCity": "Time in Tokyo"
+    },
+    "worldClock": {
+      "title": "World Clock | Live Time in Major Cities",
+      "heading": "World Clock",
+      "description": "Check live local time in major cities around the world. Updated every second with timezone-aware formatting.",
+      "backToHome": "Back to clock home"
+    },
+    "utcConverter": {
+      "title": "UTC Converter | Convert UTC to Local City Time",
+      "heading": "UTC Converter",
+      "description": "Convert a UTC datetime to local time across global cities in one place.",
+      "backToHome": "Back to clock home"
+    },
+    "timeInCity": {
+      "title": "Current Time in {city} | Digital Clock",
+      "heading": "Current Time in {city}",
+      "description": "Live local time for {city} ({timezone}). Updated every second.",
+      "backToWorldClock": "Back to world clock"
+    }
   }
 }

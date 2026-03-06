@@ -1,0 +1,48 @@
+'use client'
+
+import { useEffect, useState } from 'react'
+
+import type { Locale } from '@/lib'
+
+type Props = {
+  locale: Locale
+  timeZone: string
+}
+
+export function CityTimeCard({ locale, timeZone }: Props) {
+  const [, setTick] = useState(0)
+
+  useEffect(() => {
+    const id = setInterval(() => setTick((prev) => prev + 1), 1000)
+    return () => clearInterval(id)
+  }, [])
+
+  const now = new Date()
+  const time = new Intl.DateTimeFormat(locale, {
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false,
+    timeZone,
+  }).format(now)
+
+  const date = new Intl.DateTimeFormat(locale, {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    weekday: 'long',
+    timeZone,
+  }).format(now)
+
+  return (
+    <div className="rounded-2xl border border-border bg-background-overlay p-6 text-center">
+      <p className="font-mono text-[clamp(2.2rem,9vw,4rem)] leading-none text-foreground">
+        {time}
+      </p>
+      <p className="mt-3 text-sm text-foreground-muted">{date}</p>
+      <p className="mt-2 text-xs uppercase tracking-wider text-foreground-muted">
+        {timeZone}
+      </p>
+    </div>
+  )
+}
