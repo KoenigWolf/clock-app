@@ -31,6 +31,16 @@ const OG_LOCALE_MAP: Record<Locale, string> = {
   hi: 'hi_IN',
 }
 
+const LOCALE_COUNTRY_LABELS: Record<Locale, string> = {
+  ja: 'Japan',
+  en: 'United States',
+  es: 'Spain',
+  pt: 'Brazil',
+  fr: 'France',
+  de: 'Germany',
+  hi: 'India',
+}
+
 export async function generateMetadata({
   params: { locale },
 }: Props): Promise<Metadata> {
@@ -61,11 +71,15 @@ export async function generateMetadata({
         }
       : {}),
   }
+  const countryLabel = LOCALE_COUNTRY_LABELS[currentLocale]
 
   return {
     metadataBase: new URL(siteUrl),
     applicationName: t('appName'),
-    title: t('title'),
+    title: {
+      default: `${t('title')} (${countryLabel})`,
+      template: `%s (${countryLabel})`,
+    },
     description: t('description'),
     keywords,
     alternates: {
