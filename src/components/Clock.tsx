@@ -4,7 +4,7 @@ import { useLocale, useTranslations } from 'next-intl'
 import { useMemo } from 'react'
 
 import { useTime } from '@/hooks/useTime'
-import type { Locale } from '@/i18n/config'
+import { defaultLocale, locales, type Locale } from '@/i18n/config'
 import { formatLocalizedDate } from '@/utils/formatDate'
 
 import { DateDisplay } from './DateDisplay'
@@ -15,7 +15,10 @@ const LOADING_PLACEHOLDER = '--:--:--'
 export function Clock() {
   const time = useTime()
   const t = useTranslations()
-  const locale = useLocale() as Locale
+  const rawLocale = useLocale()
+  const locale: Locale = locales.includes(rawLocale as Locale)
+    ? (rawLocale as Locale)
+    : defaultLocale
 
   const weekdays = useMemo(
     () => ({
