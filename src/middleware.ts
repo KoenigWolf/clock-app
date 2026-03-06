@@ -1,6 +1,6 @@
 import createMiddleware from 'next-intl/middleware'
 
-import { defaultLocale, locales } from './i18n/config'
+import { defaultLocale, locales } from '@/lib'
 
 export default createMiddleware({
   locales,
@@ -8,7 +8,6 @@ export default createMiddleware({
   localePrefix: 'always',
 })
 
-// Keep matcher in sync with locales defined in src/i18n/config.ts
 export const config = {
   matcher: ['/', '/(ja|en)/:path*'],
 }

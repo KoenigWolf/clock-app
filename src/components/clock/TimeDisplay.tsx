@@ -24,10 +24,12 @@ export const TimeDisplay = memo(function TimeDisplay({
     <div
       role="timer"
       aria-label={timeLabel}
-      className="text-[clamp(4rem,15vw,10rem)] font-extralight tracking-wide text-white drop-shadow-[0_0_30px_rgba(255,255,255,0.1)] will-change-contents contain-layout contain-paint"
+      className="relative inline-block text-[clamp(4rem,15vw,10rem)] font-extralight tracking-wide text-foreground drop-shadow-glow will-change-contents"
     >
       <HoursMinutesDisplay hours={hours} minutes={minutes} />
-      <SecondsDisplay seconds={seconds} />
+      <span className="absolute left-full top-0">
+        <SecondsDisplay seconds={seconds} />
+      </span>
     </div>
   )
 })

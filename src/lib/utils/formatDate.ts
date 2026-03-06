@@ -1,4 +1,4 @@
-import type { Locale } from '@/i18n/config'
+import type { Locale } from '../i18n'
 
 type WeekdayKey =
   | 'sunday'
@@ -19,7 +19,6 @@ const WEEKDAY_KEYS = [
   'saturday',
 ] as const satisfies readonly WeekdayKey[]
 
-// English month names - for additional locales, consider passing monthNames as parameter
 const MONTH_NAMES = [
   'Jan',
   'Feb',

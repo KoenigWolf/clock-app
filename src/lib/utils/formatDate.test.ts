@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { formatLocalizedDate } from '../formatDate'
+import { formatLocalizedDate } from './formatDate'
 
 const jaWeekdays = {
   sunday: '日',
@@ -25,21 +25,21 @@ const enWeekdays = {
 describe('formatLocalizedDate', () => {
   describe('Japanese locale', () => {
     it('formats date in Japanese format', () => {
-      const date = new Date(2024, 0, 15, 12, 0, 0) // Monday
+      const date = new Date(2024, 0, 15, 12, 0, 0)
       const result = formatLocalizedDate(date, 'ja', jaWeekdays)
 
       expect(result).toBe('2024年1月15日 (月)')
     })
 
     it('formats midnight correctly', () => {
-      const date = new Date(2024, 0, 1, 0, 0, 0) // Monday
+      const date = new Date(2024, 0, 1, 0, 0, 0)
       const result = formatLocalizedDate(date, 'ja', jaWeekdays)
 
       expect(result).toBe('2024年1月1日 (月)')
     })
 
     it('formats end of year correctly', () => {
-      const date = new Date(2024, 11, 31, 23, 59, 59) // Tuesday
+      const date = new Date(2024, 11, 31, 23, 59, 59)
       const result = formatLocalizedDate(date, 'ja', jaWeekdays)
 
       expect(result).toBe('2024年12月31日 (火)')
@@ -58,14 +58,14 @@ describe('formatLocalizedDate', () => {
 
   describe('English locale', () => {
     it('formats date in English format', () => {
-      const date = new Date(2024, 0, 15, 12, 0, 0) // Monday
+      const date = new Date(2024, 0, 15, 12, 0, 0)
       const result = formatLocalizedDate(date, 'en', enWeekdays)
 
       expect(result).toBe('Mon, Jan 15, 2024')
     })
 
     it('formats end of year correctly', () => {
-      const date = new Date(2024, 11, 31, 23, 59, 59) // Tuesday
+      const date = new Date(2024, 11, 31, 23, 59, 59)
       const result = formatLocalizedDate(date, 'en', enWeekdays)
 
       expect(result).toBe('Tue, Dec 31, 2024')

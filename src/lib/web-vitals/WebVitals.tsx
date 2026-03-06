@@ -5,13 +5,9 @@ import { onCLS, onFCP, onINP, onLCP, onTTFB } from 'web-vitals'
 import type { Metric } from 'web-vitals'
 
 function reportWebVitals(metric: Metric) {
-  // Log to console in development
   if (process.env.NODE_ENV === 'development') {
     console.log(metric)
   }
-
-  // In production, you could send to analytics
-  // Example: sendToAnalytics(metric)
 }
 
 export function WebVitals() {

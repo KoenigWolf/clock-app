@@ -1,10 +1,10 @@
 import { render, screen, act } from '@testing-library/react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { __resetTimeStore } from '@/hooks/useTime'
-import { IntlWrapper } from '@/test-utils/i18n'
+import { __resetTimeStore } from '@/lib/hooks'
+import { IntlWrapper } from '@/test'
 
-import { Clock } from '../Clock'
+import { Clock } from './Clock'
 
 describe('Clock', () => {
   beforeEach(() => {
