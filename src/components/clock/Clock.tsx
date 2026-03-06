@@ -3,9 +3,8 @@
 import { useLocale, useTranslations } from 'next-intl'
 import { useMemo } from 'react'
 
-import { useTime } from '@/hooks/useTime'
-import { defaultLocale, locales, type Locale } from '@/i18n/config'
-import { formatLocalizedDate } from '@/utils/formatDate'
+import { defaultLocale, formatLocalizedDate, locales, type Locale } from '@/lib'
+import { useTime } from '@/lib/hooks'
 
 import { DateDisplay } from './DateDisplay'
 import { TimeDisplay } from './TimeDisplay'
@@ -41,7 +40,7 @@ export function Clock() {
         aria-label={t('time.loading')}
       >
         <div
-          className="text-8xl font-extralight text-white/20"
+          className="text-8xl font-extralight text-foreground-disabled"
           aria-hidden="true"
         >
           {LOADING_PLACEHOLDER}

@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages, getTranslations } from 'next-intl/server'
 
-import { locales, type Locale } from '@/i18n/config'
+import { locales, type Locale } from '@/lib'
 
 import '../globals.css'
 
@@ -40,7 +40,7 @@ export async function generateMetadata({
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#0f172a',
+  themeColor: '#000000',
 }
 
 export function generateStaticParams() {

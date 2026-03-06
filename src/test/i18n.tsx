@@ -1,7 +1,7 @@
 import { NextIntlClientProvider } from 'next-intl'
 import type { ReactNode } from 'react'
 
-import { defaultLocale, type Locale } from '@/i18n/config'
+import { defaultLocale, type Locale } from '@/lib'
 
 import enMessages from '../../messages/en.json'
 import jaMessages from '../../messages/ja.json'

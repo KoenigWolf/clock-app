@@ -14,7 +14,7 @@ export const DateDisplay = memo(function DateDisplay({ date }: Props) {
     <p
       role="status"
       aria-label={`${t('todaysDate')} ${date}`}
-      className="mt-4 text-xl font-light tracking-wider text-white/60"
+      className="mt-4 text-xl font-light tracking-wider text-foreground-muted"
     >
       {date}
     </p>

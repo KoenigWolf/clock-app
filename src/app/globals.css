@@ -2,11 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  font-feature-settings: 'tnum';
+@layer base {
+  :root {
+    --color-bg-primary: 0 0% 0%;
+    --color-bg-overlay: 0 0% 100% / 0.1;
+    --color-bg-overlay-strong: 0 0% 100% / 0.2;
+
+    --color-fg-primary: 0 0% 100%;
+    --color-fg-muted: 0 0% 100% / 0.5;
+    --color-fg-disabled: 0 0% 100% / 0.2;
+
+    --color-border-default: 0 0% 100% / 0.2;
+
+    --color-shadow: 0 0% 100% / 0.1;
+  }
+
+  html.light {
+    --color-bg-primary: 0 0% 100%;
+    --color-bg-overlay: 0 0% 0% / 0.05;
+    --color-bg-overlay-strong: 0 0% 0% / 0.1;
+
+    --color-fg-primary: 0 0% 0%;
+    --color-fg-muted: 0 0% 0% / 0.5;
+    --color-fg-disabled: 0 0% 0% / 0.2;
+
+    --color-border-default: 0 0% 0% / 0.2;
+
+    --color-shadow: 0 0% 0% / 0.1;
+
+    color-scheme: light;
+  }
+
+  html {
+    font-feature-settings: 'tnum';
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: hsl(var(--color-bg-primary));
+    color: hsl(var(--color-fg-primary));
+  }
 }
 
-/* Performance optimizations */
 @layer utilities {
   .contain-layout {
     contain: layout;
@@ -30,7 +67,6 @@ html {
   }
 }
 
-/* Optimized pulse animation using GPU-accelerated opacity */
 @layer components {
   .colon-pulse {
     animation: colon-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
@@ -48,7 +84,6 @@ html {
   }
 }
 
-/* Reduce motion for users who prefer it */
 @media (prefers-reduced-motion: reduce) {
   .colon-pulse {
     animation: none;

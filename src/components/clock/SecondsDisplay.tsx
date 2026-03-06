@@ -8,7 +8,7 @@ export const SecondsDisplay = memo(
   function SecondsDisplay({ seconds }: Props) {
     return (
       <span
-        className="ml-2 align-top text-[0.4em] tabular-nums text-white/50"
+        className="ml-2 align-top text-[0.4em] tabular-nums text-foreground-muted"
         aria-hidden="true"
       >
         {seconds}
